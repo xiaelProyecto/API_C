@@ -18,11 +18,11 @@ namespace API_C.Controllers
     {
         internal MongoDBRepository _collections = new MongoDBRepository();
         private ITokenCollection _token = new TokenCollection();
-        [HttpGet("{Username}/{Password}")]
+        [HttpGet("{username}/{password}")]
         public async Task<IActionResult> Login(string username,string password)
         {
             var users =  _collections._db.GetCollection<User>(Env.C_USERS);
-            var result = users.FindAsync<User>(u=>u.nickname.Equals(username)&&u.password.Equals(password)).Result.FirstOrDefault();
+            var result = users.FindAsync<User>(u=>u.nickname == username &&u.password == password).Result.FirstOrDefault();
             if (result == null) return NotFound("Usuario o Contraseña incorrecta");
             var res = await _token.GetToken();
             if (res == null) return Forbid("Falla con el servidor");
