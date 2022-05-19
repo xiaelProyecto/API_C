@@ -13,7 +13,7 @@ namespace API_C
         public const string C_USERS = "users";
         public const string C_TOKENS = "tokens";
         public const string C_ROLES = "roles";
-        public const string C_ANIMES = "";
+        public const string C_ANIMES = "anime";
 
     }
 }

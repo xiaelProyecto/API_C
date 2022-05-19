@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace API_C.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Produces("application/json")]
     public class MovieController : Controller
@@ -35,5 +35,13 @@ namespace API_C.Controllers
             return NoContent();
         }
 
+        
+        [HttpGet("{name}")]
+        public async Task<IActionResult> SearchService(string name)
+        {
+            var result = await _db.GetMovieByName(name);
+            if (result == null) return BadRequest();
+            return Ok(result);
+        }
     }
 }

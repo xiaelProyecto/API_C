@@ -2,11 +2,13 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace API_C.Model
 {
     [BsonIgnoreExtraElements]
-    public class Movie 
+    public class Anime
     {
         [BsonId]
         [BsonElement("_id")]
@@ -20,13 +22,12 @@ namespace API_C.Model
         public string trailerurl { get; set; }
         [BsonElement("lanzamiento")]
         public DateTime lanzamiento { get; set; }
-        [BsonElement("plataformas")]
-        public IEnumerable<Object> plataformas { get; set; }
-        [BsonElement("reparto")]
-        public IEnumerable<string> reparto { get; set; }
-        [BsonElement("edadminima")]
-        public Int32 edadminima { get; set; }
+        [BsonElement("categoria")]
+        public IEnumerable<string> categoria { get; set; }
         [BsonElement("descripcion")]
         public string descripcion { get; set; }
+        [BsonElement("director")]
+        public string director { get; set; }
+
     }
 }

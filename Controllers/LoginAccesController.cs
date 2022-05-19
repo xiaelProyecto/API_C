@@ -11,7 +11,7 @@ using API_C.Collections;
 
 namespace API_C.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Produces("application/json")]
     public class LoginAccesController : Controller

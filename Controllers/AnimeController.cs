@@ -11,28 +11,29 @@ namespace API_C.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Produces("application/json")]
-    public class UserController : Controller
+    public class AnimeController : Controller
     {
-        private IUsersCollection _db = new UsersCollection();
+        private IAnimeCollection _db = new AnimeCollection();
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllAnimes()
         {
-            var result = await _db.GetAllUsers();
+            var result = await _db.GetAllAnimes();
             if (result.Count() < 0) return BadRequest();
             return Ok(result);
         }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id)
+        public async Task<IActionResult> GetAnimeById(string id)
         {
-            var result = await _db.GetUserById(id);
+            var result = await _db.GetAnimeById(id);
             if (result == null) return BadRequest();
             return Ok(result);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) {
-            await _db.DeleteUser(id);
-            return Ok();
+        public async Task<IActionResult> DeleteAnime(string id)
+        {
+            await _db.DeleteAnime(id);
+            return NoContent();
         }
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using API_C.Model;
 using API_C.Repositorio;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -31,7 +32,14 @@ namespace API_C.Collections
 
         public async Task<Movie> GetMovieById(string id)
         {
-            return await collection.FindAsync<Movie>(movie=>movie.id==id).Result.FirstAsync();
+            var movie = await collection.FindAsync<Movie>(movie => movie.id == id).Result.FirstAsync();
+            return movie; 
+        }
+        
+        public async Task<Movie> GetMovieByName(string name)
+        {
+            var movie = await collection.FindAsync<Movie>(movie => movie.titulo == name).Result.FirstAsync();
+            return movie;
         }
     }
 }
