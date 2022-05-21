@@ -27,6 +27,14 @@ namespace API_C.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("{username}/{password}/{mail}")]
+        public async Task<IActionResult> createUser(string username,string password,string mail)
+        {
+            var res = await _db.GetUserByName(username);
+            if (res!=null) return BadRequest("Usuario existente");
+            await _db.AddUser(username, password, mail);
+            return Ok();
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {

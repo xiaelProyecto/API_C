@@ -18,9 +18,21 @@ namespace API_C.Collections
             collection = _repository._db.GetCollection<User>(Env.C_USERS);
         }
 
-        public Task AddUser(User user)
+        public async Task AddUser(string username,string password,string mail)
         {
-            throw new NotImplementedException();
+            var vacio = new List<string>();
+            await collection.InsertOneAsync(new User
+            {
+                nickname = username,
+                password = password,
+                mail = mail,
+                age = 0,
+                avatar = "https://i.ibb.co/7vYwcGP/Xiahel.png",
+                rol = "6272d0128c7c6d405e2456ea",
+                descripcion = "",
+                favm = vacio.ToArray(),
+                favn = vacio.ToArray()
+            }, null);
         }
 
         public async Task DeleteUser(string id)
@@ -100,6 +112,12 @@ namespace API_C.Collections
         public async Task UpdateUserPass(string id, string pass)
         {
             var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.password, pass));
+        }
+
+        public async Task<User> GetUserByName(string name)
+        {
+            var res = await collection.FindAsync<User>(u => u.nickname.ToLower() == name.ToLower()).Result.FirstOrDefaultAsync();
+            return res;
         }
     }
 }

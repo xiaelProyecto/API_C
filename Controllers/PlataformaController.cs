@@ -15,7 +15,7 @@ namespace API_C.Controllers
     {
         private IPlataformaCollection _db = new PlataformaCollection();
         [HttpGet]
-        public async Task<IActionResult> GetAllMovies()
+        public async Task<IActionResult> GetPlataforms()
         {
             var result = await _db.GetPlataforms();
             if (result.Count < 0) return BadRequest();
