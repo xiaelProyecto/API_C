@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace API_C.Model
 {
-    public class LoginData
+    [BsonIgnoreExtraElements]
+    public class Plataforma
     {
         [BsonId]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string id { get; set; }
-        public string token { get; set; }
-        
+        [BsonElement("nombre")]
+        public string nombre { get; set; }
     }
 }

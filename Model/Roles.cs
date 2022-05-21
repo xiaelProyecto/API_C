@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace API_C.Model
 {
-    public class LoginData
+    [BsonIgnoreExtraElements]
+    public class Roles
     {
         [BsonId]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string id { get; set; }
-        public string token { get; set; }
-        
+        [BsonElement("rol")]
+        public string rol { get; set; }
     }
 }

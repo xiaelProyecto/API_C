@@ -14,18 +14,26 @@ namespace API_C.Controllers
     public class UserController : Controller
     {
         private IUsersCollection _db = new UsersCollection();
+        private IRolesCollection _aux = new RolesCollection();
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var result = await _db.GetAllUsers();
             if (result.Count() < 0) return BadRequest();
+            foreach (var u in result)
+            {
+                var format = await _aux.GetRol(u.rol);
+                u.rol = format.rol;
+            }
             return Ok(result);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var result = await _db.GetUserById(id);
-            if (result == null) return BadRequest();
+            var format = await _aux.GetRol(result.rol);
+            if (result == null || format == null) return BadRequest();
+            result.rol = format.rol;
             return Ok(result);
         }
         [HttpDelete("{id}")]

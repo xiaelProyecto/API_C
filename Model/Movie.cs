@@ -21,7 +21,7 @@ namespace API_C.Model
         [BsonElement("lanzamiento")]
         public DateTime lanzamiento { get; set; }
         [BsonElement("plataformas")]
-        public IEnumerable<Object> plataformas { get; set; }
+        public IEnumerable<string> plataformas { get; set; }
         [BsonElement("reparto")]
         public IEnumerable<string> reparto { get; set; }
         [BsonElement("edadminima")]

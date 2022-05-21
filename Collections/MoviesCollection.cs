@@ -27,6 +27,7 @@ namespace API_C.Collections
         public async Task<List<Movie>> GetAllMovies()
         {
             var movies =  await collection.FindAsync(movies=>true).Result.ToListAsync();
+            
             return movies;
         }
 

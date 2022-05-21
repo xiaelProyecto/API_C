@@ -22,7 +22,15 @@ namespace API_C.Model
         public string mail { get; set; }
         [BsonElement("age")]
         public Int32 age { get; set; }
+        [BsonElement("avatar")]
+        public string avatar { get; set; }
         [BsonElement("rol")]
         public string rol { get; set; }
+        [BsonElement("descripcion")]
+        public string descripcion { get; set; }
+        [BsonElement("favm")]
+        public IEnumerable<string> favm { get; set; }
+        [BsonElement("favn")]
+        public IEnumerable<string> favn { get; set; }
     }
 }
