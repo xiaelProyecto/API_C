@@ -40,9 +40,66 @@ namespace API_C.Collections
             return user;
         }
 
-        public Task UpdateUser(string id)
+        public async Task UpdateUserAge(string id, Int32 age)
         {
-            throw new NotImplementedException();
+            var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.age, age));
+        }
+
+        public async Task UpdateUserDesc(string id,string desc)
+        {
+
+            var update = await collection.UpdateOneAsync(user=>user.id==id,Builders<User>.Update.Set(u=>u.descripcion,desc));
+           
+        }
+
+        public async Task UpdateUserFavm(string id, string movie)
+        {
+            var listaNueva = new List<string>();
+            var favm = await collection.FindAsync<User>(user => user.id == id).Result.FirstOrDefaultAsync();
+            if(favm.favm.Count() <= 0)
+            {
+                listaNueva.Add(movie);
+                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+            }
+            else
+            {
+                listaNueva = favm.favm.ToList();
+                listaNueva.Add(movie);
+                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+            }
+        }
+        public async Task UpdateUserFava(string id, string anime)
+        {
+            var listaNueva = new List<string>();
+            var favm = await collection.FindAsync<User>(user => user.id == id).Result.FirstOrDefaultAsync();
+            if (favm.favm.Count() <= 0)
+            {
+                listaNueva.Add(anime);
+                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+                listaNueva.Clear();
+            }
+            else
+            {
+                listaNueva = favm.favm.ToList();
+                listaNueva.Add(anime);
+                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+                listaNueva.Clear();
+            }
+        }
+
+        public async Task UpdateUserMail(string id, string mail)
+        {
+            var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.mail, mail));
+        }
+
+        public async Task UpdateUserNick(string id, string name)
+        {
+            var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.nickname, name));
+        }
+
+        public async Task UpdateUserPass(string id, string pass)
+        {
+            var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.password, pass));
         }
     }
 }

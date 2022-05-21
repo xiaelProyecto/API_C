@@ -34,5 +34,10 @@ namespace API_C.Collections
             var anime = await collection.FindAsync<Anime>(anime => anime.id == id).Result.FirstAsync();
             return anime;
         }
+        public async Task<Anime> GetAnimeByName(string name)
+        {
+            var anime = await collection.FindAsync<Anime>(a => a.titulo == name).Result.FirstAsync();
+            return anime;
+        }
     }
 }

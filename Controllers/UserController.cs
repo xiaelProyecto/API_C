@@ -41,6 +41,48 @@ namespace API_C.Controllers
             await _db.DeleteUser(id);
             return Ok();
         }
-
+        [HttpPut("{id}/{desc}")]
+        public async Task<IActionResult> UpdateUserDesc(string id,string desc)
+        {
+            await _db.UpdateUserDesc(id, desc);
+            return Ok();
+        }
+        [HttpPut("{id}/{age}")]
+        public async Task<IActionResult> UpdateUserAge(string id, Int32 age)
+        {
+            
+            await _db.UpdateUserAge(id, age);
+            return Ok();
+        }
+        [HttpPut("{id}/{name}")]
+        public async Task<IActionResult> UpdateUserNick(string id, string name)
+        {
+            await _db.UpdateUserNick(id, name);
+            return Ok();
+        }
+        [HttpPut("{id}/{mail}")]
+        public async Task<IActionResult> UpdateUserMail(string id, string mail)
+        {
+            await _db.UpdateUserMail(id, mail);
+            return Ok();
+        }
+        [HttpPut("{id}/{pass}")]
+        public async Task<IActionResult> UpdateUserPass(string id, string pass)
+        {
+            await _db.UpdateUserPass(id, pass);
+            return Ok();
+        }
+        [HttpPut("{id}/{movie}")]
+        public async Task<IActionResult> UpdateUserFavm(string id, string movie)
+        {
+            await _db.UpdateUserFavm(id, movie);
+            return Ok();
+        }
+        [HttpPut("{id}/{anime}")]
+        public async Task<IActionResult> UpdateUserFava(string id, string anime)
+        {
+            await _db.UpdateUserFava(id, anime);
+            return Ok();
+        }
     }
 }

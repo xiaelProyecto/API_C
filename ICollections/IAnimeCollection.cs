@@ -11,5 +11,6 @@ namespace API_C.ICollections
         Task<List<Anime>> GetAllAnimes();
         Task<Anime> GetAnimeById(string id);
         Task DeleteAnime(string id);
+        Task<Anime> GetAnimeByName(string name);
     }
 }

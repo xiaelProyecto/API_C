@@ -35,5 +35,12 @@ namespace API_C.Controllers
             await _db.DeleteAnime(id);
             return NoContent();
         }
+        [HttpGet("{name}")]
+        public async Task<IActionResult> SearchService(string name)
+        {
+            var result = await _db.GetAnimeByName(name);
+            if (result == null) return BadRequest();
+            return Ok(result);
+        }
     }
 }
