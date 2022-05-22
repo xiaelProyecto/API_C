@@ -127,5 +127,11 @@ namespace API_C.Collections
             var res = await collection.FindAsync<User>(u => u.nickname.ToLower() == name.ToLower()).Result.FirstOrDefaultAsync();
             return res;
         }
+
+        public async Task<User> GetUserByMail(string mail)
+        {
+            var res = await collection.FindAsync<User>(u =>u.mail.ToLower() == mail.ToLower()).Result.FirstOrDefaultAsync();
+            return res;
+        }
     }
 }

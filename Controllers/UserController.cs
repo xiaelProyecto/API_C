@@ -35,7 +35,8 @@ namespace API_C.Controllers
         public async Task<IActionResult> createUser(string username,string password,string mail)
         {
             var res = await _db.GetUserByName(username);
-            if (res!=null) return BadRequest("Usuario existente");
+            var res2 = await _db.GetUserByMail(mail);
+            if (res!=null || res2 !=null) return BadRequest("Usuario existente O Correo existente");
             await _db.AddUser(username, password, mail);
             return Ok();
         }

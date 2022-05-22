@@ -11,6 +11,7 @@ namespace API_C.ICollections
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(string id);
         Task<User> GetUserByName(string name);
+        Task<User> GetUserByMail(string mail);
         Task DeleteUser(string id);
         Task AddUser(string username,string password,string mail);
         Task UpdateUserDesc(string id,string desc);
