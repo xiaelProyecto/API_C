@@ -28,5 +28,7 @@ namespace API_C.Model
         public Int32 edadminima { get; set; }
         [BsonElement("descripcion")]
         public string descripcion { get; set; }
+        [BsonElement("score")]
+        public Int32 score { get; set; }
     }
 }

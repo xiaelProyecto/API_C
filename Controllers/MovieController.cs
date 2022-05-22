@@ -21,7 +21,7 @@ namespace API_C.Controllers
             var listaPlataformas = new List<string>();
             var result = await _db.GetAllMovies();
             var plataformas = await _aux.GetPlataforms();
-            if (result.Count < 0 && plataformas.Count < 0) return BadRequest();
+            if (result.Count < 0 || plataformas.Count < 0) return BadRequest();
             foreach(var r in result)
             {
                 foreach(var p in r.plataformas)
@@ -38,8 +38,17 @@ namespace API_C.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovieById(string id)
         {
+            var listaPlataformas = new List<string>();
             var result = await _db.GetMovieById(id);
-            if (result == null) return BadRequest();
+            var plataformas = await _aux.GetPlataforms();
+            if (result == null || plataformas.Count < 0) return BadRequest();
+            foreach (var p in result.plataformas)
+            {
+                var plataforma = plataformas.Where(pid => pid.id == p).Select(name => name.nombre).FirstOrDefault();
+                listaPlataformas.Add(plataforma);
+            }
+            result.plataformas = listaPlataformas.ToArray();
+            listaPlataformas.Clear();
             return Ok(result);
         }
         [HttpDelete("{id}")]
@@ -53,8 +62,17 @@ namespace API_C.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> SearchService(string name)
         {
+            var listaPlataformas = new List<string>();
             var result = await _db.GetMovieByName(name);
-            if (result == null) return BadRequest();
+            var plataformas = await _aux.GetPlataforms();
+            if (result == null || plataformas.Count < 0) return BadRequest();
+            foreach (var p in result.plataformas)
+            {
+                var plataforma = plataformas.Where(pid => pid.id == p).Select(name => name.nombre).FirstOrDefault();
+                listaPlataformas.Add(plataforma);
+            }
+            result.plataformas = listaPlataformas.ToArray();
+            listaPlataformas.Clear();
             return Ok(result);
         }
     }

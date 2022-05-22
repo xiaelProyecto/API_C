@@ -1,5 +1,6 @@
 ﻿using API_C.Collections;
 using API_C.ICollections;
+using API_C.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,12 @@ namespace API_C.Controllers
     {
         private IUsersCollection _db = new UsersCollection();
         private IRolesCollection _aux = new RolesCollection();
+        private IMoviesCollection _m = new MoviesCollection();
+        private IAnimeCollection _a = new AnimeCollection();
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            var aux1 = new List<string>();
             var result = await _db.GetAllUsers();
             if (result.Count() < 0) return BadRequest();
             foreach (var u in result)
@@ -38,11 +42,34 @@ namespace API_C.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
+            var aux1 = new List<string>();
             var result = await _db.GetUserById(id);
             var format = await _aux.GetRol(result.rol);
+            var movies = await _m.GetAllMovies();
+            var animes = await _a.GetAllAnimes();
             if (result == null || format == null) return BadRequest();
             result.rol = format.rol;
+            if (result.favm.Count()>0) { 
+                foreach(var i in result.favm)
+                {
+                    var p = movies.Where(m => m.id == i).Select(m=>m.titulo).FirstOrDefault();
+                    aux1.Add(p);
+                };
+            }
+            result.favm = aux1.ToArray();
+            aux1.Clear();
+            if (result.favn.Count() > 0)
+            {
+                foreach (var i in result.favn)
+                {
+                    var p = animes.Where(a => a.id == i).Select(a => a.titulo).FirstOrDefault();
+                    aux1.Add(p);
+                };
+            }
+            result.favn = aux1.ToArray();
+            aux1.Clear();
             return Ok(result);
+
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) {

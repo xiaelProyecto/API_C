@@ -76,26 +76,34 @@ namespace API_C.Collections
             else
             {
                 listaNueva = favm.favm.ToList();
-                listaNueva.Add(movie);
-                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+                if (!listaNueva.Contains(movie))
+                {
+                    listaNueva.Add(movie);
+                    var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+                    listaNueva.Clear();
+                }
+                
             }
         }
         public async Task UpdateUserFava(string id, string anime)
         {
             var listaNueva = new List<string>();
-            var favm = await collection.FindAsync<User>(user => user.id == id).Result.FirstOrDefaultAsync();
-            if (favm.favm.Count() <= 0)
+            var fav = await collection.FindAsync<User>(user => user.id == id).Result.FirstOrDefaultAsync();
+            if (fav.favn.Count() <= 0)
             {
                 listaNueva.Add(anime);
-                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
+                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favn, listaNueva.ToArray()));
                 listaNueva.Clear();
             }
             else
             {
-                listaNueva = favm.favm.ToList();
-                listaNueva.Add(anime);
-                var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favm, listaNueva.ToArray()));
-                listaNueva.Clear();
+                listaNueva = fav.favn.ToList();
+                if (!listaNueva.Contains(anime))
+                {
+                    listaNueva.Add(anime);
+                    var update = await collection.UpdateOneAsync(user => user.id == id, Builders<User>.Update.Set(u => u.favn, listaNueva.ToArray()));
+                    listaNueva.Clear();
+                }
             }
         }
 
