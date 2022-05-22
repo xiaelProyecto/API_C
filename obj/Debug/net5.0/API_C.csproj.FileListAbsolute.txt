@@ -43,3 +43,7 @@ E:\ProyectoFinal\API_C\API_C\obj\Debug\net5.0\ref\API_C.dll
 E:\ProyectoFinal\API_C\API_C\obj\Debug\net5.0\API_C.pdb
 E:\ProyectoFinal\API_C\API_C\obj\Debug\net5.0\API_C.genruntimeconfig.cache
 E:\ProyectoFinal\API_C\API_C\bin\Debug\net5.0\Newtonsoft.Json.dll
+E:\ProyectoFinal\API_C\API_C\bin\Debug\net5.0\Microsoft.AspNetCore.AzureAppServices.HostingStartup.dll
+E:\ProyectoFinal\API_C\API_C\bin\Debug\net5.0\Microsoft.AspNetCore.AzureAppServicesIntegration.dll
+E:\ProyectoFinal\API_C\API_C\bin\Debug\net5.0\Microsoft.Extensions.Logging.AzureAppServices.dll
+E:\ProyectoFinal\API_C\API_C\obj\Debug\net5.0\API_C.csproj.CopyComplete
